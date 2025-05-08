@@ -1,3 +1,9 @@
+# Beeblio - HES-SO-VS_64-31 React Introduction Solutions
+
+This repository contains the solutions for the exercices of the React part of the 64-31 Web Development Course from HES-SO Valais/Wallis.
+
+Each exercise solution can be found in a dedicated branch.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
