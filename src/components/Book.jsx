@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 function Book({ title, author, year, pages, cover }) {
-  /* 3. Update isLiked state initialization */
   const [isLiked, setIsLiked] = useState(
     localStorage.getItem(title)
       ? JSON.parse(localStorage.getItem(title))
@@ -9,16 +8,22 @@ function Book({ title, author, year, pages, cover }) {
   );
 
   useEffect(() => {
-    /* 1. Add a useEffect to the Book component that logs the status changes of the isLiked state */
     console.log(title + " like status changed to : " + isLiked);
-
-    /* 2. With a useEffect, save the isLiked value in the LocalStorage everytime it changes */
     localStorage.setItem(title, JSON.stringify(isLiked));
   }, [isLiked]);
 
+  /* 2. Element variable for the formatted book title */
+  let formattedTitle;
+  if (isLiked) {
+    formattedTitle = <h2 style={{ color: "lightgreen" }}>{title}</h2>;
+  } else {
+    formattedTitle = <h2 style={{ color: "white" }}>{title}</h2>;
+  }
+
   return (
     <div>
-      <h2>{title}</h2>
+      {/* Render the formatted title element variable */}
+      {formattedTitle}
       <h4>{author}</h4>
       <p>Published in : {year}</p>
       <p>Pages : {pages}</p>
@@ -29,7 +34,8 @@ function Book({ title, author, year, pages, cover }) {
             setIsLiked((previousIsLiked) => !previousIsLiked);
           }}
         >
-          Like: {isLiked.toString()}
+          {/* 1. Conditional rendering with inline ternary operator */}
+          {isLiked ? "❤️" : "🤍"}
         </button>
       </p>
 
