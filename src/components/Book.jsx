@@ -1,7 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Book({ title, author, year, pages, cover }) {
-  const [isLiked, setIsLiked] = useState(false);
+  /* 3. Update isLiked state initialization */
+  const [isLiked, setIsLiked] = useState(
+    localStorage.getItem(title)
+      ? JSON.parse(localStorage.getItem(title))
+      : false
+  );
+
+  useEffect(() => {
+    /* 1. Add a useEffect to the Book component that logs the status changes of the isLiked state */
+    console.log(title + " like status changed to : " + isLiked);
+
+    /* 2. With a useEffect, save the isLiked value in the LocalStorage everytime it changes */
+    localStorage.setItem(title, JSON.stringify(isLiked));
+  }, [isLiked]);
 
   return (
     <div>
