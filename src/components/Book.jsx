@@ -1,32 +1,33 @@
 import { useEffect, useState } from "react";
 
-function Book({ title, author, year, pages, cover }) {
+// Note that the Book component was refactored to accept a book object instead of each prop separately
+function Book({ bookData }) {
   const [isLiked, setIsLiked] = useState(
-    localStorage.getItem(title)
-      ? JSON.parse(localStorage.getItem(title))
+    localStorage.getItem(bookData.title)
+      ? JSON.parse(localStorage.getItem(bookData.title))
       : false
   );
 
   useEffect(() => {
-    console.log(title + " like status changed to : " + isLiked);
-    localStorage.setItem(title, JSON.stringify(isLiked));
+    console.log(bookData.title + " like status changed to : " + isLiked);
+    localStorage.setItem(bookData.title, JSON.stringify(isLiked));
   }, [isLiked]);
 
   /* 2. Element variable for the formatted book title */
   let formattedTitle;
   if (isLiked) {
-    formattedTitle = <h2 style={{ color: "lightgreen" }}>{title}</h2>;
+    formattedTitle = <h2 style={{ color: "lightgreen" }}>{bookData.title}</h2>;
   } else {
-    formattedTitle = <h2 style={{ color: "white" }}>{title}</h2>;
+    formattedTitle = <h2 style={{ color: "white" }}>{bookData.title}</h2>;
   }
 
   return (
     <div>
       {/* Render the formatted title element variable */}
       {formattedTitle}
-      <h4>{author}</h4>
-      <p>Published in : {year}</p>
-      <p>Pages : {pages}</p>
+      <h4>{bookData.author}</h4>
+      <p>Published in : {bookData.year}</p>
+      <p>Pages : {bookData.pages}</p>
 
       <p>
         <button
@@ -39,7 +40,11 @@ function Book({ title, author, year, pages, cover }) {
         </button>
       </p>
 
-      <img alt={title} src={cover} style={{ maxHeight: "300px" }} />
+      <img
+        alt={bookData.title}
+        src={bookData.cover}
+        style={{ maxHeight: "300px" }}
+      />
     </div>
   );
 }
