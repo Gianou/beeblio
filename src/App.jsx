@@ -1,11 +1,11 @@
+import { useState } from "react";
 import "./App.css";
 import Book from "./components/Book";
+import AddBookForm from "./components/AddBookForm";
 
 function App() {
   const appName = "Beeblio";
-
-  // All the book data is now in an array that contains book objects
-  const books = [
+  const [books, setBooks] = useState([
     {
       id: 1,
       title: "Don Quixote",
@@ -30,13 +30,14 @@ function App() {
       pages: 327,
       cover: "http://fast.hevs.ch/temp/covers/3.jpeg",
     },
-  ];
+  ]);
 
   return (
     <div>
       <h1>Welcome to {appName}!</h1>
-      {/* Mapping of the books array to render the list of book */}
-      {/* Note that the Book component was refactored to accept a book object instead of each prop separately */}
+
+      <AddBookForm books={books} setBooks={setBooks} />
+
       {books.map((book) => (
         <Book bookData={book} key={book.id} />
       ))}
