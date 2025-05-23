@@ -15,6 +15,7 @@
   background-color: #f7f7f7;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #333;
 }
 
 /* Input fields styling */
@@ -45,8 +46,4 @@
   color: #333;
   font-size: 24px;
   margin-bottom: 20px;
-}
-
-.NewBook-Form {
-  background-color: #333;
 }
