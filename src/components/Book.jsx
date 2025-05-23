@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-// Note that the Book component was refactored to accept a book object instead of each prop separately
 function Book({ bookData }) {
   const [isLiked, setIsLiked] = useState(
     localStorage.getItem(bookData.title)
@@ -13,7 +12,6 @@ function Book({ bookData }) {
     localStorage.setItem(bookData.title, JSON.stringify(isLiked));
   }, [isLiked]);
 
-  /* 2. Element variable for the formatted book title */
   let formattedTitle;
   if (isLiked) {
     formattedTitle = <h2 style={{ color: "lightgreen" }}>{bookData.title}</h2>;
@@ -23,7 +21,6 @@ function Book({ bookData }) {
 
   return (
     <div>
-      {/* Render the formatted title element variable */}
       {formattedTitle}
       <h4>{bookData.author}</h4>
       <p>Published in : {bookData.year}</p>
@@ -35,7 +32,6 @@ function Book({ bookData }) {
             setIsLiked((previousIsLiked) => !previousIsLiked);
           }}
         >
-          {/* 1. Conditional rendering with inline ternary operator */}
           {isLiked ? "❤️" : "🤍"}
         </button>
       </p>
