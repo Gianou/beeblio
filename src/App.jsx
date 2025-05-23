@@ -5,6 +5,9 @@ import AddBookForm from "./components/AddBookForm";
 
 function App() {
   const appName = "Beeblio";
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const [books, setBooks] = useState([
     {
       id: 1,
@@ -34,6 +37,9 @@ function App() {
 
   return (
     <div>
+      <button onClick={() => setIsLoggedIn((previousValue) => !previousValue)}>
+        {isLoggedIn ? "Log out" : "Log in"}
+      </button>
       <h1>Welcome to {appName}!</h1>
 
       <AddBookForm books={books} setBooks={setBooks} />
