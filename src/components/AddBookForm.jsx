@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import AuthContext from "../contexts/AuthContext";
 
 function AddBookForm({ books, setBooks }) {
+  // 3. Access the context
+  const isLoggedIn = useContext(AuthContext);
+
   const emptyBook = { title: "", author: "", year: "", pages: "", cover: "" };
 
   const [newBook, setNewBook] = useState(emptyBook);
@@ -15,6 +19,11 @@ function AddBookForm({ books, setBooks }) {
     setBooks([newBook, ...books]);
     setNewBook(emptyBook);
   };
+
+  // Added "if-return" conditional rendering
+  if (!isLoggedIn) {
+    return;
+  }
 
   return (
     <div>

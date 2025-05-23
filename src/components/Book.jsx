@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import AuthContext from "../contexts/AuthContext";
 
 function Book({ bookData }) {
+  // 3. Access the context
+  const isLoggedIn = useContext(AuthContext);
+
   const [isLiked, setIsLiked] = useState(
     localStorage.getItem(bookData.title)
       ? JSON.parse(localStorage.getItem(bookData.title))
@@ -12,8 +16,9 @@ function Book({ bookData }) {
     localStorage.setItem(bookData.title, JSON.stringify(isLiked));
   }, [isLiked]);
 
+  // Added condition for element conditional rendering
   let formattedTitle;
-  if (isLiked) {
+  if (isLiked && isLoggedIn) {
     formattedTitle = <h2 style={{ color: "lightgreen" }}>{bookData.title}</h2>;
   } else {
     formattedTitle = <h2 style={{ color: "white" }}>{bookData.title}</h2>;
@@ -26,15 +31,18 @@ function Book({ bookData }) {
       <p>Published in : {bookData.year}</p>
       <p>Pages : {bookData.pages}</p>
 
-      <p>
-        <button
-          onClick={() => {
-            setIsLiked((previousIsLiked) => !previousIsLiked);
-          }}
-        >
-          {isLiked ? "❤️" : "🤍"}
-        </button>
-      </p>
+      {/* Added && operator conditional rendering */}
+      {isLoggedIn && (
+        <p>
+          <button
+            onClick={() => {
+              setIsLiked((previousIsLiked) => !previousIsLiked);
+            }}
+          >
+            {isLiked ? "❤️" : "🤍"}
+          </button>
+        </p>
+      )}
 
       <img
         alt={bookData.title}

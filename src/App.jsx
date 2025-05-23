@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Book from "./components/Book";
 import AddBookForm from "./components/AddBookForm";
+import AuthContext from "./contexts/AuthContext";
 
 function App() {
   const appName = "Beeblio";
@@ -42,11 +43,14 @@ function App() {
       </button>
       <h1>Welcome to {appName}!</h1>
 
-      <AddBookForm books={books} setBooks={setBooks} />
+      {/* 2. Provide the context */}
+      <AuthContext.Provider value={isLoggedIn}>
+        <AddBookForm books={books} setBooks={setBooks} />
 
-      {books.map((book) => (
-        <Book bookData={book} key={book.id} />
-      ))}
+        {books.map((book) => (
+          <Book bookData={book} key={book.id} />
+        ))}
+      </AuthContext.Provider>
     </div>
   );
 }
